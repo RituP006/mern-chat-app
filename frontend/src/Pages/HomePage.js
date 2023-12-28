@@ -25,7 +25,7 @@ function Homepage() {
   return (
     <Container maxW="xl" centerContent>
       {/* <Box
-        d="flex"
+        display="flex"
         justifyContent="center"
         p={3}
         bg="white"
@@ -42,7 +42,8 @@ function Homepage() {
         p={4}
         borderRadius="lg"
         borderWidth="1px"
-        d="flex"
+        display="flex"
+        flexDirection="column"
         justifyContent="center"
         m="40px 0 15px 0"
       >
@@ -53,7 +54,7 @@ function Homepage() {
           my="1rem"
           color="#243143"
         >
-          Let's Connect
+          Welcome to QuickChat!
         </Text>
         <Tabs isFitted variant="soft-rounded" colorScheme="purple">
           <TabList mb="1em">

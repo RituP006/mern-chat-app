@@ -56,11 +56,15 @@ const Login = () => {
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      navigate.push("/chats");
+      navigate("/chats");
     } catch (error) {
+      const errorMessage =
+        error.response && error.response.data
+          ? error.response.data.message || "An error occurred"
+          : "An error occurred";
       toast({
         title: "Error Occured!",
-        description: error.response.data.message,
+        description: errorMessage,
         status: "error",
         duration: 5000,
         isClosable: true,
