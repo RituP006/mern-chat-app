@@ -20,7 +20,7 @@ import { Tooltip } from "@chakra-ui/tooltip";
 import { BellIcon, ChevronDownIcon, ChatIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/toast";
 import ChatLoading from "../ChatLoading";
@@ -51,9 +51,40 @@ function SideDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     navigate("/");
+  };
+
+  const getAllUsers = async () => {
+    try {
+      setLoading(true);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const { data } = await axios.get("/api/user", config);
+
+      setLoading(false);
+      setSearchResult(data);
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: "Failed to Load Users",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+      setLoading(false);
+    }
   };
 
   const handleSearch = async () => {
@@ -90,6 +121,7 @@ function SideDrawer() {
         isClosable: true,
         position: "bottom-left",
       });
+      setLoading(false);
     }
   };
 
@@ -119,6 +151,7 @@ function SideDrawer() {
         isClosable: true,
         position: "bottom-left",
       });
+      setLoadingChat(false);
     }
   };
 
