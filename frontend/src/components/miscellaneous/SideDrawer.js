@@ -31,6 +31,7 @@ import { Effect } from "react-notification-badge";
 import { getSender } from "../../config/ChatLogics";
 import UserListItem from "../userAvatar/UserListItem";
 import { useChatContext } from "../../context/ChatProvider";
+import { Container } from "@chakra-ui/react";
 
 function SideDrawer() {
   const [search, setSearch] = useState("");
@@ -203,12 +204,24 @@ function SideDrawer() {
           </Menu>
           <Menu>
             <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
-              <Avatar
-                size="sm"
-                cursor="pointer"
-                name={user.name}
-                src={user.pic}
-              />
+              <Container
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                gap="2"
+              >
+                <Avatar
+                  size="sm"
+                  cursor="pointer"
+                  name={user.name}
+                  src={
+                    user.pic.includes("anonymous-avatar-icon-25")
+                      ? ""
+                      : user.pic
+                  }
+                />{" "}
+                <h5 mt={3}>{user.name}</h5>
+              </Container>
             </MenuButton>
             <MenuList>
               <ProfileModal user={user}>

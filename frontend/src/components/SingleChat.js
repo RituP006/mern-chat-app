@@ -17,7 +17,7 @@ import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { useChatContext } from "../context/ChatProvider";
 
-const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = "https://quickchat-5u1m.onrender.com/"; // "http://localhost:5000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -74,7 +74,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   const sendMessage = async (event) => {
-    console.log(event);
     if (
       (event === undefined && newMessage) ||
       (event?.key === "Enter" && newMessage)
@@ -262,7 +261,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 color="white"
                 _hover={{ bg: "#bda5d7", color: "#755993" }}
                 onClick={() => {
-                  console.log("send");
                   sendMessage();
                 }}
               >

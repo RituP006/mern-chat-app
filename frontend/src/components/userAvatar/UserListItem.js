@@ -25,7 +25,7 @@ const UserListItem = ({ user, handleFunction }) => {
         size="sm"
         cursor="pointer"
         name={user.name}
-        src={user.pic}
+        src={user.pic.includes("anonymous-avatar-icon-25") ? "" : user.pic}
       />
       <Box>
         <Text>{user.name}</Text>
